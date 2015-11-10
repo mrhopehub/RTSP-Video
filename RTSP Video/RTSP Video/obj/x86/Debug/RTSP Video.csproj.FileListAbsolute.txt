@@ -1,0 +1,11 @@
+D:\C#Workplace\RTSP Video\RTSP Video\bin\Debug\RTSP Video.exe
+D:\C#Workplace\RTSP Video\RTSP Video\bin\Debug\RTSP Video.pdb
+D:\C#Workplace\RTSP Video\RTSP Video\obj\x86\Debug\RTSP_Video.Form1.resources
+D:\C#Workplace\RTSP Video\RTSP Video\obj\x86\Debug\RTSP_Video.Properties.Resources.resources
+D:\C#Workplace\RTSP Video\RTSP Video\obj\x86\Debug\RTSP Video.exe
+D:\C#Workplace\RTSP Video\RTSP Video\obj\x86\Debug\RTSP Video.pdb
+D:\C#Workplace\RTSP Video\RTSP Video\bin\x86\Debug\RTSP Video.exe
+D:\C#Workplace\RTSP Video\RTSP Video\bin\x86\Debug\RTSP Video.pdb
+D:\C#Workplace\RTSP Video\RTSP Video\bin\Debug\RTSP Video.exe.config
+D:\C#Workplace\RTSP Video\RTSP Video\obj\x86\Debug\RTSP Video.csproj.GenerateResource.Cache
+D:\C#Workplace\RTSP Video\RTSP Video\obj\x86\Debug\RTSP Video.csprojResolveAssemblyReference.cache
