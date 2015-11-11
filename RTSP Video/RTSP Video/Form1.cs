@@ -21,12 +21,17 @@ namespace RTSP_Video
 
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox1.Enabled = false;
+            button1.Enabled = false;
+            button2.Enabled = true;
+            rtspPlayer.Stop();
+            rtspPlayer.Location = textBox1.Text;
             rtspPlayer.Play();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Enabled = false;
+            button2.Enabled = false;
             rtspPlayer = new SimpleRtspPlayer(textBox1.Text, panel1.Handle);
         }
 
@@ -38,7 +43,24 @@ namespace RTSP_Video
 
         private void button2_Click(object sender, EventArgs e)
         {
+            textBox1.Enabled = true;
+            button1.Enabled = true;
+            button2.Enabled = false;
             rtspPlayer.Stop();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            rtspPlayer.Stop();
+            if (rtspPlayer.DrawHandle == panel1.Handle)
+            {
+                rtspPlayer.DrawHandle = pictureBox1.Handle;
+            }
+            else
+            {
+                rtspPlayer.DrawHandle = panel1.Handle;
+            }
+            rtspPlayer.Play();
         }
     }
 }

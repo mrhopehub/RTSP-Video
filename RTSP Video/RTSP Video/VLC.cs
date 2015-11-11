@@ -106,7 +106,19 @@ namespace MyLibVLC
     public class SimpleRtspPlayer : IDisposable
     {
         private string mLocation;
+
+        public string Location
+        {
+            get { return mLocation; }
+            set { mLocation = value; }
+        }
         private IntPtr mDrawHandle;
+
+        public IntPtr DrawHandle
+        {
+            get { return mDrawHandle; }
+            set { mDrawHandle = value; }
+        }
         private IntPtr VlcInstanceHandle;
         private IntPtr VlcMediaPlayerHandle;
         private string[] args = new string[] {
@@ -127,6 +139,7 @@ namespace MyLibVLC
             lock (this.cmdQueue.SyncRoot)
             {
                 this.cmdQueue.Enqueue(command);
+                tmpSemaphore.Release();
             }
         }
         //辅助线程调用，用于获取命令，注意线程安全
@@ -216,6 +229,11 @@ namespace MyLibVLC
                             break;
                             //垃圾回收命令,不是break，而是return。
                         case 2:
+                            //消耗一个信号
+                            if (playerState == 1)
+                            {
+                                tmpSemaphore.Wait();
+                            }
                             TryDispose();
                             return;
                     }
@@ -228,19 +246,16 @@ namespace MyLibVLC
         public void Stop()
         {
             sendCommand(0);
-            tmpSemaphore.Release();
         }
 
         public void Play()
         {
             sendCommand(1);
-            tmpSemaphore.Release();
         }
 
         public void Dispose()
         {
             sendCommand(2);
-            tmpSemaphore.Release();
             tryDisposeSemaphore.Wait();
         }
 
