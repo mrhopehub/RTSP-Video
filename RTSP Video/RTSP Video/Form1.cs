@@ -13,6 +13,7 @@ namespace RTSP_Video
 {
     public partial class Form1 : Form
     {
+        private int playFlag = 0;
         SimpleRtspPlayer rtspPlayer;
         public Form1()
         {
@@ -27,11 +28,14 @@ namespace RTSP_Video
             rtspPlayer.Stop();
             rtspPlayer.Location = textBox1.Text;
             rtspPlayer.Play();
+            playFlag = 1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             button2.Enabled = false;
+            pictureBox1.BackColor = Color.LightGray;
+            panel1.BackColor = Color.LightBlue;
             rtspPlayer = new SimpleRtspPlayer(textBox1.Text, panel1.Handle);
         }
 
@@ -47,20 +51,30 @@ namespace RTSP_Video
             button1.Enabled = true;
             button2.Enabled = false;
             rtspPlayer.Stop();
+            playFlag = 0;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            rtspPlayer.Stop();
             if (rtspPlayer.DrawHandle == panel1.Handle)
             {
+                pictureBox1.BackColor = Color.LightBlue;
+                panel1.BackColor = Color.LightGray;
                 rtspPlayer.DrawHandle = pictureBox1.Handle;
             }
             else
             {
+                pictureBox1.BackColor = Color.LightGray;
+                panel1.BackColor = Color.LightBlue;
                 rtspPlayer.DrawHandle = panel1.Handle;
             }
-            rtspPlayer.Play();
+
+            //重启
+            if (playFlag == 1)
+            {
+                rtspPlayer.Stop();
+                rtspPlayer.Play();
+            }
         }
     }
 }
